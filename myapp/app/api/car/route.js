@@ -1,12 +1,12 @@
 import db from "@/lib/db";
-import Post from "@/models/Car";
+import Car from "@/models/Car";
 
 export async function GET(req) {
     await db.connect()
 
     try {
-        const posts = await Post.find({}).populate("creator")
-        return new Response(JSON.stringify(posts), { status: 200 })
+        const cars = await Car.find({}).populate("creator")
+        return new Response(JSON.stringify(cars), { status: 200 })
     } catch (error) {
         return new Response(JSON.stringify(null), { status: 500 })
     }
@@ -18,9 +18,9 @@ export async function POST(req) {
 
     try {
         const body = await req.json()
-        const newPost = await Post.create(body)
+        const newCar = await Car.create(body)
 
-        return new Response(JSON.stringify(newPost), { status: 201 })
+        return new Response(JSON.stringify(newCar), { status: 201 })
     } catch (error) {
         return new Response(JSON.stringify(null), { status: 500 })
     }
